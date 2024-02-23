@@ -1,0 +1,78 @@
+﻿@model REALLY9.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Sản phẩm</h4>
+        <div class="table-respontive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.ProductId</td>
+                    </tr>
+                    <tr>
+                        <td>Product name:</td>
+                        <td>@Model.ProductName</td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td>@Model.Description</td>
+                    </tr>
+                    <tr>
+                        <td>Catergories ID:</td>
+                        <td>@Model.CatId</td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td>@Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Discount:</td>
+                        <td>@Model.Discount</td>
+                    </tr>
+                   
+                    <tr>
+                        <td>Date Created:</td>
+                        <td>@Model.DateCreated</td>
+                    </tr>
+                    <tr>
+                        <td>Date Modifield:</td>
+                        <td>@Model.DateModified</td>
+                    </tr>
+                    <tr>
+                        <td>Best Seller:</td>
+                        <td>@Model.BestSellers</td>
+                    </tr>
+                    <tr>
+                        <td>Home Flag:</td>
+                        <td>@Model.HomeFlag</td>
+                    </tr>
+                    <tr>
+                        <td>Active:</td>
+                        <td>@Model.Active</td>
+                    </tr>
+                    <tr>
+                        <td>Alias:</td>
+                        <td>@Model.Alias</td>
+                    </tr>
+                    <tr>
+                        <td>UnitStock:</td>
+                        <td>@Model.UnitslnStock</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+ <form asp-action="Delete">
+        <input type="hidden" asp-for="ProductId" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">Về trang chủ</a>
+    </form>

@@ -1,0 +1,64 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<REALLY9.Models.TblTinTuc>
+
+@{
+    ViewData["Title"] = "Blog -" + ViewBag.CurrentPage;
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
+}
+
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height" >
+
+        <img height="400px" width="1920px" src="~/images/anhnen/anhnenblog (1).png" />
+    </div>
+    <div class="blog-area blog-column-2 section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                @if(Model!=null && Model.Count() > 0)
+                {
+                    foreach(var item in Model)
+                    {
+                        string url = $"/tin-tuc/{item.Alias}-{item.PostId}.html";
+                        <div class="col-md-6">
+                            <div class="blog-item">
+                                <div class="blog-img img-zoom-effect">
+                                    <a href="@url">
+                                        <img class="img-full" src="~/images/newfeeds/@item.Thumb" width="570" height="485" alt="@item.Title">
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-meta text-dim-gray pb-3">
+                                        <ul>
+                                            <li class="date"><i class="fa fa-calendar-o me-2"></i>@item.CreatedDate.Value.ToShortDateString()</li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <h5 class="title mb-4">
+                                        <a href="@url">@item.Title</a>
+                                    </h5>
+                                    <p class="short-desc mb-5">@item.Scontents</p>
+                                    <div class="button-wrap">
+                                        <a class="btn btn-custom-size lg-size btn-dark rounded-0" href="@url">Đọc thêm</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            
+                
+                <div class="col-lg-12">
+                    <div class="pagination-area pt-10">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

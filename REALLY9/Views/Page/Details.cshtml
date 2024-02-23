@@ -1,0 +1,38 @@
+﻿@model REALLY9.Models.Page
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+    string url = $"/page/{Model.Alias}";
+}
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height">
+        <img height="400px" width="1920px" src="~/images/anhnen/anhnenshop.png" />
+    </div>
+    <div class="blog-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog-detail-item">
+                        <div class="blog-img">
+                            <img class="img-full" src="~/images/pages/@Model.Thumb" alt="@Model.Title">
+                        </div>
+                        <div class="blog-content text-start pb-0">
+                            <div class="blog-meta text-dim-gray pb-3">
+                                <ul>
+                                    <li class="date"><i class="fa fa-calendar-o me-2"></i>@Model.CreatedAt</li>
+                                   
+                                </ul>
+                            </div>
+                            <h5 class="title mb-4">
+                                <a href="@url">@Model.PageName</a>
+                            </h5>
+                            @Html.Raw(Model.Contents)
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

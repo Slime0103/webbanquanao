@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/favicon.ico" />
+
+    <title>
+        REALLY9 SHOP
+    </title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+
+    <link rel="stylesheet" href="~/assets/css/vendor/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/assets/css/vendor/Pe-icon-7-stroke.css" />
+
+    <!-- Plugin CSS (Global Plugins Files) -->
+    <link rel="stylesheet" href="~/assets/css/plugins/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="~/assets/css/plugins/magnific-popup.min.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <!-- Style CSS -->
+</head>
+<body>
+    @await Html.PartialAsync("_HeaderPartialView.cshtml")
+
+    @RenderBody()
+
+   
+    
+   @* <div id="chat-plugin">
+        <div id="chat-header" onclick="toggleChat()">
+            <h3>AI </h3>
+        </div>
+        <div id="chat-box" class="chat-container" style="display: none;">
+            <div class="chat-box" id="chatOutput">
+                <!-- Messages will be displayed here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type a message..." />
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>*@
+    @await Html.PartialAsync("_FooterPartialView.cshtml")
+    @RenderSection("Scripts", required: false)
+
+    
+    <script src="~/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="~/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="~/assets/js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="~/assets/js/vendor/jquery.waypoints.js"></script>
+
+    <!--Plugins JS-->
+    <script src="~/assets/js/plugins/wow.min.js"></script>
+    <script src="~/assets/js/plugins/jquery-ui.min.js"></script>
+    <script src="~/assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="~/assets/js/plugins/jquery.nice-select.js"></script>
+    <script src="~/assets/js/plugins/parallax.min.js"></script>
+    <script src="~/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.9/signalr.min.js"></script>
+    <!--Main JS (Common Activation Codes)-->
+    <script src="~/assets/js/main.js"></script>
+    
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>

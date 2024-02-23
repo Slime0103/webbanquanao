@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/favicon.ico" />
+
+    <title>
+        REALLY9 SHOP
+    </title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link href="~/csss/bootstrap.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    
+    <link href="~/csss/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/csss/responsive.css" rel="stylesheet" />
+    <link href="~/fonts/fontawesome-webfont.ttf" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/vendor/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/vendor/Pe-icon-7-stroke.css" />
+    <link href="~/csss/style.css" rel="stylesheet" />
+    <!-- Plugin CSS (Global Plugins Files) -->
+    <link rel="stylesheet" href="~/css/plugins/animate.min.css">
+    <link rel="stylesheet" href="~/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="~/css/plugins/magnific-popup.min.css" />
+
+    <!-- Style CSS -->
+</head>
+<body>
+    <div class="main-header header-sticky" data-bg-color="#bac34e">
+        <div class="container">
+            <div class="main-header_nav position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 d-none d-lg-block">
+                        <div class="main-menu">
+                            <nav class="main-nav">
+                                <ul>
+                                    <li class="drop-holder">
+                                        <a asp-controller="Home" asp-action="Index" class="nav-link">
+                                            Trang chủ
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Product" asp-action="Index" class="nav-link">
+                                            Shop
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Home" asp-action="About" class="nav-link">
+                                            About Us
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/blog.html" class="nav-link">
+                                            Blog
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="/page/shopping-guide">
+                                            Shopping guide
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Chat", "GPT")" class="nav-link">
+                                            Chatbox
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/ContactUs.html" class="nav-link">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <style>
+        #chat-plugin {
+            position: fixed;
+            bottom: 30px; /* Tăng khoảng cách từ dưới lên */
+            right: 30px; /* Tăng khoảng cách từ phải sang */
+            width: 60px; /* Giảm chiều rộng để tạo hình tròn */
+            height: 60px; /* Đặt chiều cao bằng chiều rộng */
+            z-index: 1000;
+            border-radius: 50%; /* Làm tròn khung */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        #chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px; /* Điều chỉnh padding để text nằm giữa */
+            text-align: center; /* Căn chỉnh text giữa */
+            border-radius: 50%; /* Làm tròn header */
+        }
+
+        #chat-box {
+            display: none; /* Initially hidden */
+            position: fixed;
+            bottom: 90px; /* Đặt vị trí hiển thị của chat box */
+            right: 20px;
+            width: 500px; /* Chiều rộng của chat box */
+            height: auto; /* Chiều cao tự động */
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px; /* Làm tròn góc của chat box */
+        }
+
+        .chat-container {
+            width: 500px; /* Tăng chiều rộng */
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Thêm shadow */
+        }
+
+        .chat-box {
+            height: 400px; /* Tăng chiều cao */
+            overflow-y: scroll;
+            padding: 20px; /* Tăng padding */
+            background: #fff;
+            font-size: 1.1em; /* Tăng kích thước font */
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: #f0f0f0;
+        }
+
+            .chat-input input {
+                flex-grow: 1;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 10px; /* Tăng padding */
+                font-size: 1.1em; /* Tăng kích thước font */
+            }
+
+            .chat-input button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 15px; /* Tăng padding */
+                margin-left: 10px;
+                cursor: pointer;
+                font-size: 1.1em; /* Tăng kích thước font */
+            }
+    </style>
+
+    <div id="chat-plugin">
+        <div id="chat-header" onclick="toggleChat()">
+            <h3>AI tư vấn</h3>
+        </div>
+        <div id="chat-box" class="chat-container" style="display: none;">
+            <div class="chat-box" id="chatOutput">
+                <!-- Messages will be displayed here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type a message..." />
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+
+   @section Scripts {
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value;
+            input.value = '';
+            addToChat('User', message);
+
+            // Đảm bảo URL này là đúng
+            const response = await fetch(`/GPT/UseChatGPT?query=${encodeURIComponent(message)}`);
+            const data = await response.text();
+            addToChat('ChatGPT', data);
+        }
+
+        function addToChat(sender, message) {
+            const chatOutput = document.getElementById('chatOutput');
+            chatOutput.innerHTML += `<div><b>${sender}:</b> ${message}</div>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+        function toggleChat() {
+            var chatBox = document.getElementById("chat-box");
+            if (chatBox.style.display === "none") {
+                chatBox.style.display = "block";
+            } else {
+                chatBox.style.display = "none";
+            }
+        }
+    </script>
+}
+</body>
+</html>

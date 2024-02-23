@@ -1,0 +1,45 @@
+﻿@model REALLY9.Models.Comment
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<h1>Chi tiết bình luận</h1>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin bình luận</h4>
+        <div class="table-respontive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.CommentId</td>
+                    </tr>
+                    <tr>
+                        <td>Bình luận:</td>
+                        <td>@Model.CommentText</td>
+                    </tr>
+
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Active</td>
+                    </tr>
+                    <tr>
+                        <td>Tên người bình luận:</td>
+                        <td>@Model.Customer.FullName</td>
+                    </tr>
+                   <tr>
+                        <td>Tên sản phẩm:</td>
+                        <td>@Model.Product.ProductName</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CommentId">Sửa</a> |
+    <a asp-action="Index">Về trang chủ</a>
+</div>

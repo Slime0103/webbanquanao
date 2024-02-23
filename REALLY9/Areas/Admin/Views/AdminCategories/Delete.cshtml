@@ -1,0 +1,40 @@
+﻿@model REALLY9.Models.Category
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin danh mục</h4>
+        <div class="table-respontive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.CatId</td>
+                    </tr>
+                    <tr>
+                        <td>Tên danh mục:</td>
+                        <td>@Model.CatName</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Published</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CatId" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">Về trang chủ</a>
+    </form>
+</div>

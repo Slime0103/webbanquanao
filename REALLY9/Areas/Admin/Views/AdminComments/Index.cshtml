@@ -1,0 +1,53 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<REALLY9.Models.Comment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Trang chủ binh luan</h1>
+
+<p>
+    <a asp-action="Create">Thêm mới binh luan</a>
+</p>
+
+<div class="table-respontive">
+    <div class="bg-light rounded h-100 p-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Bình luận</th>
+                    <th scope="col">Trạng thái</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.CommentId</th>
+                            <td>@item.CommentText</td>
+                            <td>@item.Active</td>
+
+                            <td>
+                                <a class="btn btn-outline-primary m-2" asp-area="Admin" asp-controller="AdminComments" asp-action="Details" asp-route-id="@item.CommentId">Chi Tiet</a>
+                                <a class="btn btn-outline-success m-2" asp-area="Admin" asp-controller="AdminComments" asp-action="Edit" asp-route-id="@item.CommentId">Sua</a>
+                                <a class="btn btn-outline-danger m-2" asp-area="Admin" asp-controller="AdminComments" asp-action="Delete" asp-route-id="@item.CommentId">Xoa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div aria-label="Page navigation example">
+            <ul class="pagination">
+                <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminComments" asp-action="Index" />
+            </ul>
+        </div>
+    </div>
+</div>
+

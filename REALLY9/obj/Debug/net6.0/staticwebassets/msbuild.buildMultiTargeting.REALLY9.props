@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\REALLY9.props" />
+</Project>

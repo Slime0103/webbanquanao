@@ -1,0 +1,227 @@
+﻿@using System.Security.Claims
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Chat";
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
+    var customerId = HttpContextAccessor.HttpContext.User.FindFirst("CustomerId")?.Value;
+}
+
+
+
+<style>
+    #chat-container {
+        width: 100%;
+        max-width: 800px; /* Mở rộng khung chat */
+        margin: auto;
+        padding: 20px;
+        background-color: #f4f4f4;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #chat-inputs {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    #userInput, #messageInput {
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        flex: 1; /* Mỗi trường chiếm một nửa rộng của hàng */
+    }
+
+    #sendMessageButton {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #messagesList {
+        border: 1px solid #ddd;
+        height: 300px; /* Tăng chiều cao khung tin nhắn */
+        overflow-y: auto;
+        padding: 10px;
+        background-color: white;
+        border-radius: 4px;
+    }
+</style>
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height">
+
+        <img height="400px" width="1920px" src="~/images/anhnen/tuvan.png" />
+    </div>
+    <div class="about-banner different-bg-position section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-5">
+                    <div class="parallax-img-wrap">
+                        <div class="papaya">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.2">
+                                    <img height="414px" width="503px" src="~/images/anhnen/tuvankhachhang.png" alt="Banner Images" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-7 align-self-center">
+                    <div class="about-banner-content">
+                        <div class="section-title">
+                            <span class="sub-title">Chào mừng đến với AI tư vấn của cửa hàng REALLY9</span>
+                            <h2 class="title font-size-60 mb-6">Đội ngũ tư vấn khách hàng</h2>
+                            <p class="short-desc mb-0">Cửa hàng thời trang REALLY9 tự hào với đội ngũ nhân viên tư vấn chuyên nghiệp, luôn sẵn sàng hỗ trợ khách hàng. Mỗi nhân viên tại đây không chỉ am hiểu sâu sắc về xu hướng thời trang, mà còn có kỹ năng lắng nghe và hiểu rõ nhu cầu của từng người, từ đó đề xuất những bộ trang phục phù hợp nhất. Dù bạn theo đuổi phong cách nhẹ nhàng hay năng động, REALLY9 cam kết mang đến cho bạn những lựa chọn thời trang không chỉ đẹp mắt mà còn thoải mái và độc đáo. </p>
+                            <div class="button-wrap pt-8">
+                                <a class="btn btn-custom-size lg-size btn-primary btn-dark-hover rounded-0" href="@Url.Action("Chat", "GPT")">Hoặc chat với AI</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<div id="chat-container">
+    <div id="chat-inputs">
+        <input type="text" id="userInput" placeholder="Your Name">
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <button id="sendMessageButton">Send</button>
+    </div>
+    <div id="messagesList"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.9/signalr.min.js"></script>
+
+<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+    connection.on("ReceiveMessage", function (user, message) {
+        var msg = document.createElement("div");
+        msg.textContent = user + ": " + message;
+        document.getElementById("messagesList").appendChild(msg);
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    document.getElementById("sendMessageButton").addEventListener("click", function (event) {
+        var user = document.getElementById("userInput").value;
+        var message = document.getElementById("messageInput").value;
+
+        connection.invoke("SendMessage", user, message).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        event.preventDefault();
+    });
+</script>
+
+@*<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chathub").build();
+
+    // Nhận tin nhắn và thêm vào giao diện
+    connection.on("ReceiveMessage", function (user, message) {
+        var msg = document.createElement("div");
+        msg.textContent = `${user}: ${message}`;
+        document.getElementById("messages").appendChild(msg);
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    document.getElementById("sendButton").addEventListener("click", function (event) {
+        var user = document.getElementById("userInput").value;
+        var message = document.getElementById("messageInput").value;
+        connection.invoke("SendMessage", user, message).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+</script>*@    @* <script>
+        $(document).ready(function () {
+            var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+            var customerId = '@customerId';
+            var selectedAdminId;
+
+            // Hàm để xử lý tin nhắn nhận được
+            connection.on("ReceiveMessage", function (message) {
+                var msg = $('<div></div>').html(`<b>${message.senderId}</b>: ${message.text}`);
+                $('#chat-messages').append(msg);
+            });
+
+            // Bắt đầu kết nối SignalR
+            connection.start().catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            // Hàm tải danh sách admin từ server
+            function loadAdminList() {
+                $.ajax({
+                    url: '/api/getAdmins',
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function (admins) {
+                        var select = $('#adminSelect');
+                        select.empty();
+                        admins.forEach(function (admin) {
+                            select.append(`<option value="${admin.AccountId}">${admin.Fullname}</option>`);
+                        });
+                    },
+                    error: function (error) {
+                        console.error('Error loading admin list:', error);
+                    }
+                });
+            }
+
+            loadAdminList();
+
+            // Hàm được gọi khi chọn một admin từ dropdown
+            $('#adminSelect').change(function () {
+                selectedAdminId = $(this).val();
+                console.log("Selected Admin ID:", selectedAdminId);
+                loadMessages();
+            });
+
+            // Hàm gửi tin nhắn
+            $('#sendButton').click(function () {
+                var message = $('#messageInput').val();
+                if (!selectedAdminId) {
+                    console.log("No admin selected");
+                    return;
+                }
+                connection.invoke("SendMessage", customerId, selectedAdminId, message)
+                    .catch(function (err) {
+                        return console.error(err.toString());
+                    });
+            });
+
+            // Hàm tải tin nhắn giữa khách hàng và admin đã chọn
+            function loadMessages() {
+                if (!selectedAdminId) {
+                    console.log("No admin selected");
+                    return;
+                }
+                connection.invoke("GetMessages", customerId, selectedAdminId)
+                    .then(function (messages) {
+                        var messagesList = $('#chat-messages');
+                        messagesList.empty();
+                        messages.forEach(function (message) {
+                            var msg = $('<div></div>').html(`<b>${message.senderId}</b>: ${message.text}`);
+                            messagesList.append(msg);
+                        });
+                    }).catch(function (err) {
+                        return console.error(err.toString());
+                    });
+            }
+        });
+    </script>*@
+}

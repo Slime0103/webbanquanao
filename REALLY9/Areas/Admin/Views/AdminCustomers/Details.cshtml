@@ -1,0 +1,72 @@
+﻿@model REALLY9.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin khách hàng</h4>
+        <div class="table-respontive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.CustomerId</td>
+                    </tr>
+                    <tr>
+                        <td>Bình luận:</td>
+                        <td>@Model.FullName</td>
+                    </tr>
+
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Birthday</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Address</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Active</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Salt</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.Ward</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.District</td>
+                    </tr>
+                   
+                    <tr>
+                        <td>Trạng thái:</td>
+                        <td>@Model.CreateDate</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CustomerId">Sửa</a> |
+    <a asp-action="Index">Về trang chủ</a>
+</div>

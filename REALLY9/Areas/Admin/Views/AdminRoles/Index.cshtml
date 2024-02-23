@@ -1,0 +1,47 @@
+﻿@model IEnumerable<REALLY9.Models.Role>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd/dist/antd.min.css" />
+@{
+    ViewData["Title"] = "Quan Li Quyen Truy Cap";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Them Quyen Truy Cap</a>
+</p>
+
+
+<div class="table-respontive">
+    <div class="bg-light rounded h-100 p-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Mo Ta</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.RoleId</th>
+                            <td>@item.RoleName</td>
+                            <td>@item.Description</td>
+                            <td>
+                                <a class="btn btn-outline-primary m-2" asp-area="Admin" asp-controller="AdminRoles" asp-action="Details" asp-route-id="@item.RoleId">Chi Tiet</a>
+                                <a class="btn btn-outline-success m-2" asp-area="Admin" asp-controller="AdminRoles" asp-action="Edit" asp-route-id="@item.RoleId">Sua</a>
+                                <a class="btn btn-outline-danger m-2" asp-area="Admin" asp-controller="AdminRoles" asp-action="Delete" asp-route-id="@item.RoleId">Xoa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

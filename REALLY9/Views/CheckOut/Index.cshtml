@@ -1,0 +1,258 @@
+﻿@model REALLY9.ModelViews.MuaHangVM
+@{
+    ViewData["Title"] = "Buy";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+    List<REALLY9.ModelViews.CartItem> Carts = ViewBag.GioHang;
+}
+
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height" >
+        <img height="400px" width="1920px" src="~/images/anhnen/anhnenshop.png" />
+    </div>
+    <div class="account-page-area section-space-y-axis-100">
+        <div class="container">
+            <form asp-controller="Checkout" asp-action="Index" method="post">
+                <input hidden asp-for="CustomerId" />
+                <input type="hidden" id="discountedTotalInput" name="DiscountedTotal" />
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="checkbox-form">
+                            <h3>Thông tin của bạn</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Họ tên</label>
+                                        <input asp-for="FullName" placeholder="Họ và tên" type="text" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>SDT</label>
+                                        <input asp-for="Phone" placeholder="SDT" type="text" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Địa chỉ</label>
+                                        <input asp-for="Address" placeholder="Địa chỉ" type="text" />
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Thành phố <span class="required">*</span></label>
+                                        <select asp-for="TinhThanh" class="myniceselect nice-select wide" asp-items="ViewBag.lsTinhThanh">
+                                            <option value="0" disabled selected>Tinh/Thanh</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Quận huyện <span class="required">*</span></label>
+                                        <select asp-for="QuanHuyen" class="myniceselect nice-select wide">
+                                            <option value="0" disabled selected>Quan/Huyen</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Thị xã <span class="required">*</span></label>
+                                        <select asp-for="PhuongXa" class="myniceselect nice-select wide">
+                                            <option value="0" disabled selected>Phuong/Xa</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Ghi chu*</label>
+                                        <input asp-for="Note" placeholder="Ghi Chu neu co" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="your-order">
+                            <h3>Thông tin hóa đơn</h3>
+                            <div class="your-order-table table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="cart-product-name">Sản phẩm</th>
+                                            <th class="cart-product-total">Giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Carts.Count() > 0)
+                                        {
+                                            foreach (var item in Carts)
+                                            {
+                                                <tr class="cart_item">
+                                                    <td class="cart-product-name">
+                                                        @item.product.ProductName<strong class="product-quantity">
+                                                            x @item.amount
+                                                        </strong>
+                                                    </td>
+                                                    <td class="cart-product-total"><span class="amout">@item.TotalMoney.ToString("#,##0")VND</span></td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                    
+                                     <tfoot>
+    <tr class="order-total">
+        <th>Tổng hóa đơn</th>
+        <td><strong><span class="amount" id="total-amount">@Carts.Sum(x=>x.TotalMoney).ToString("#,##0")VND</span></strong></td>
+    </tr>
+    <!-- Phần tử mới để hiển thị tổng tiền sau khi giảm giá -->
+    <tr class="discount-total" style="display:none;">
+        <th>Tổng sau giảm giá</th>
+        <td><strong><span class="amount" id="discounted-total"></span></strong></td>
+        <input type="hidden" id="discountedTotalInput" name="DiscountedTotal" />
+    </tr>
+</tfoot>
+                                </table>
+
+                            </div>
+                            <div class="payment-method">
+                                <div class="payment-accordion">
+                                    <div id="accordion">
+                                        <div class="card">
+                                            <div class="card-header" id="#payment-1">
+                                                <h5 class="panel-title">
+                                                    <a href="javascript:void(0)" class="" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
+                                                        Phương thức trả tiền
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                                                <div class="card-body">
+                                                    <p>
+                                                        Trả tiền khi nhận hàng
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="card">
+                                            <div class="card-header" id="#payment-3">
+                                                <h5 class="panel-title">
+                                                    <a href="javascript:void(0)" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false">
+                                                        MOMO
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                                                <div class="card-body">
+                                                    <p>
+                                                        MOMO INFOR
+                                                    </p>
+                                                    <p>
+                                                        088888888
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                            <div class="coupon-all">
+                                                 <div class="coupon">
+                                                    <input id="coupon_code" class="input-text" name="coupon_code" placeholder="Coupon code" type="text">
+                                                    <button class="apply_button" onclick="applyCoupon()" type="button">Apply coupon</button>
+                                                 </div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="order-button-payment">
+                                        <input value="Place order" type="submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</main>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('select').niceSelect();
+            $(function () {
+                $("#TinhThanh").change(function () {
+                    var locationid = $('#TinhThanh').val();
+                    $.ajax({
+                        url: '/location/QuanHuyenList',
+                        type: "GET",
+                        dataType: "JSON",
+                        data: { LocationId: locationid },
+                        success: function (QuanHuyens) {
+                            $("#QuanHuyen").empty();
+                            $("#PhuongXa").empty();
+                            var strPhuongXa = '<option value="" disabled selected> Phuong/Xa<option>';
+                            $("#PhuongXa").append(strPhuongXa);
+                            var strQuanHuyen = '<option value="" disabled selected> Quan/Huyen<option>';
+                            $("#QuanHuyen").append(strQuanHuyen);
+                            $.each(QuanHuyens, function (i, item) {
+                                var option = '<option value="' + item.locationId + '">' + item.name + '<option>';
+                                $("#QuanHuyen").append(option);
+
+                            });
+                            $('select').niceSelect('update');
+                        }
+                    });
+                });
+                $("#QuanHuyen").change(function () {
+                    var locationid = $('#QuanHuyen').val();
+                    $.ajax({
+                        url: '/location/PhuongXaList',
+                        type: "GET",
+                        dataType: "JSON",
+                        data: { LocationId: locationid },
+                        success: function (PhuongXaList) {
+
+                            $("#PhuongXa").empty();
+                            var readonly = '<option value="" disabled selected> Phuong/Xa<option>';
+                            $("#PhuongXa").append(readonly)
+
+                            $.each(PhuongXaList, function (i, item) {
+                                var option = '<option value="' + item.locationId + '">' + item.name + '<option>';
+                                $("#PhuongXa").append(option);
+
+                            });
+                            $('select').niceSelect('update');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+  function applyCoupon() {
+    var couponCode = document.getElementById("coupon_code").value;
+    var discountPercentage = 0;
+
+    if (couponCode.length == 4) {
+        discountPercentage = 10;
+    } else if (couponCode.length == 5) {
+        discountPercentage = 15;
+    } else if (couponCode.length == 6) {
+        discountPercentage = 20;
+    } else {
+        alert("Mã giảm giá không hợp lệ");
+        return;
+    }
+
+    var totalAmount = @Carts.Sum(x => x.TotalMoney);
+    var discountedAmount = totalAmount - (totalAmount * discountPercentage / 100);
+
+    // Cập nhật thông tin tổng tiền trên giao diện
+    document.getElementById("discountedTotalInput").value = discountedAmount;
+    document.getElementById("total-amount").textContent = discountedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " VND";
+    document.getElementById("discounted-total").textContent = discountedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " VND";
+    document.querySelector(".discount-total").style.display = "table-row";
+}
+</script>
+}

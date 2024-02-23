@@ -1,0 +1,50 @@
+﻿@model List<Product>
+
+
+   <div class="product-area section-space-top-100">
+    <div class="container">
+        @if (Model != null && Model.Count() > 0)
+        {
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    string url = $"/{item.Alias}-{item.ProductId}.html";
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6 mb-4">
+                        <div class="product-item">
+                            <div class="product-img img-zoom-effect">
+                                <a href="@url">
+                                    <img class="img-full" src="~/images/products/@item.Thumb" style="width: 270px; height: 300px; object-fit: cover;" alt="@item.Title">
+                                </a>
+                               
+                            </div>
+                            <div class="product-content align-self-center">
+                                <a class="product-name pb-2" href="@url">@item.ProductName</a>
+                                <div class="price-box pb-1">
+                                    <span class="new-price">@item.Price</span>
+                                </div>
+                                <div class="rating-box pb-2">
+                                    <ul>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                    </ul>
+                                </div>
+                                <p class="short-desc mb-0">@item.ShortDesc</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if ((Array.IndexOf(Model.ToArray(), item) + 1) % 4 == 0)
+                    {
+                        <div class="row"></div>
+                    }
+                       
+
+                }
+            </div>
+        }
+    </div>
+</div>

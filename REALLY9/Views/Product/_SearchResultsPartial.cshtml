@@ -1,0 +1,44 @@
+﻿@model IEnumerable<REALLY9.Models.Product>
+
+<div class="tab-content text-charcoal pt-8">
+    <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
+        <div class="product-grid-view row">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    string url = $"/{item.Alias}-{item.ProductId}.html";
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img img-zoom-effect">
+                                <a href="@url">
+                                    <img height="270px" width="270px" class="img-full" src="~/images/products/@item.Thumb" alt="@item.Title">
+                                </a>
+
+                            </div>
+                            <div class="product-content">
+                                <a class="product-name" href="@url">@item.ProductName</a>
+                                <div class="price-box pb-1">
+                                    <span class="new-price">@item.Price</span>
+                                </div>
+                                <div class="rating-box">
+                                    <ul>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Không tìm thấy sản phẩm nào</p>
+            }
+        </div>
+    </div>
+</div>

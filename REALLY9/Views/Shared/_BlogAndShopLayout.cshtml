@@ -1,0 +1,88 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/Adminassets/img/favicon.png" type="image/x-icon">
+
+    <title>
+        Giftos
+    </title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link href="~/csss/bootstrap.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+
+    <link href="~/csss/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/csss/responsive.css" rel="stylesheet" />
+    <link href="~/fonts/fontawesome-webfont.ttf" rel="stylesheet" />
+    <link href="~/fonts/pe-icon-7-stroke.eot" rel="stylesheet"/>
+    <link href="~/fonts/Pe-icon-7-stroke.svg" rel="stylesheet"/>
+    <link href="~/fonts/Pe-icon-7-stroke.ttf" rel="stylesheet"/>
+    <link href="~/fonts/Pe-icon-7-stroke.woff" rel="stylesheet"/>
+    <link rel="stylesheet" href="~/css/vendor/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/vendor/Pe-icon-7-stroke.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- Plugin CSS (Global Plugins Files) -->
+    <link rel="stylesheet" href="~/css/plugins/animate.min.css">
+    <link rel="stylesheet" href="~/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="~/css/plugins/magnific-popup.min.css" />
+
+    <!-- Style CSS -->
+</head>
+
+<body>
+
+    <!-- header section strats -->
+    @await Html.PartialAsync("_HeaderPartialView.cshtml")
+    <!-- header section stop -->
+    <!-- end header section -->
+    @RenderBody()
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- footer section -->
+    @await Html.PartialAsync("_FooterPartialView.cshtml")
+    <!-- end footer section -->
+
+
+    <script src="~/adminassets/adminboost/lib/chart/chart.min.js"></script>
+    <script src="~/adminassets/adminboost/lib/easing/easing.min.js"></script>
+    <script src="~/adminassets/adminboost/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/adminassets/adminboost/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/adminassets/adminboost/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="~/adminassets/adminboost/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+    <!-- Template Javascript -->
+    <!-- end info section -->
+
+    <script src="~/adminassets/adminboost/js/jquery-3.4.1.min.js"></script>
+
+    <script src="~/adminassets/adminboost/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="~/adminassets/adminboost/js/custom.js"></script>
+    <script src="~/adminassets/adminboost/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

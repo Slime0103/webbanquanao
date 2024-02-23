@@ -1,0 +1,101 @@
+﻿@model REALLY9.Models.TblTinTuc
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>TblTinTuc</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PostId" />
+            
+            <input type="hidden" asp-for="CreatedDate" />
+            <div class="form-floating mb-3">
+
+                <input asp-for="Title" class="form-control" placeholder="Title" />
+                <label asp-for="Title" class="control-label"></label>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+
+                <input asp-for="Scontents" class="form-control" placeholder="Scontents" />
+                <label asp-for="Scontents" class="control-label"></label>
+                <span asp-validation-for="Scontents" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+
+                <input asp-for="Contents" class="form-control" placeholder="Contents" />
+                <label asp-for="Contents" class="control-label"></label>
+                <span asp-validation-for="Contents" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+
+                <input asp-for="Thumb" name="fThumb" type="file" class="form-control" placeholder="Thumb" />
+                <label asp-for="Thumb" class="control-label"></label>
+                <span asp-validation-for="Thumb" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Published" /> @Html.DisplayNameFor(model => model.Published)
+                </label>
+            </div>
+             <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsHot" /> @Html.DisplayNameFor(model => model.IsHot)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+         <input class="form-check-input" asp-for="IsNewfeed" /> @Html.DisplayNameFor(model => model.IsNewfeed)
+                </label>
+            </div>
+           
+           
+            <div class="form-floating mb-3">
+
+                <input asp-for="Author" class="form-control" placeholder="Author" />
+                <label asp-for="Author" class="control-label"></label>
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+
+                <input asp-for="AccountId" class="form-control" placeholder="AccountId" />
+                <label asp-for="AccountId" class="control-label"></label>
+                <span asp-validation-for="AccountId" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+
+                <input asp-for="Tags" class="form-control" placeholder="Tags" />
+                <label asp-for="Tags" class="control-label"></label>
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+
+                <input asp-for="CatlId" class="form-control" placeholder="CatlId" />
+                <label asp-for="CatlId" class="control-label"></label>
+                <span asp-validation-for="CatlId" class="text-danger"></span>
+            </div>
+           
+            <div class="form-floating mb-3">
+                
+                <input asp-for="Views" class="form-control" placeholder="Views" />
+                <label asp-for="Views" class="control-label"></label>
+                <span asp-validation-for="Views" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

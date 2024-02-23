@@ -1,0 +1,110 @@
+﻿@model REALLY9.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    
+}
+
+<h1>Thêm sản phẩm</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="ProductName" class="form-control" placeholder="Product Name"  />
+                <label  asp-for="ProductName" >Product Name </label>
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+               
+                <input asp-for="ShortDesc" class="form-control" placeholder="ShortDesc" />
+                <label asp-for="ShortDesc" class="control-label">Short Desc</label>
+                <span asp-validation-for="ShortDesc" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                
+                <input asp-for="Description" class="form-control" placeholder="Description"/>
+                <label asp-for="Description" class="control-label"></label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                
+                <input asp-for="CatId" class="form-control" placeholder="CatId"/>
+                <label asp-for="CatId" class="control-label"></label>
+                <span asp-validation-for="CatId" class="text-danger"></span>
+                
+            </div>
+            <div class="form-floating mb-3">
+               
+                <input asp-for="Price" class="form-control" placeholder="Price" />
+                 <label asp-for="Price" class="control-label"></label>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                
+                <input asp-for="Discount" class="form-control" placeholder="" />
+                <label asp-for="Discount" class="control-label"></label>
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                
+                <input asp-for="Thumb" name="fThumb" type="file" class="form-control" />
+                <label asp-for="Thumb" class="control-label"></label>
+                <span asp-validation-for="Thumb" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                
+                <input asp-for="Video" class="form-control" placeholder="" />
+                <label asp-for="Video" class="control-label"></label>
+                <span asp-validation-for="Video" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="BestSellers" /> @Html.DisplayNameFor(model => model.BestSellers)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HomeFlag" /> @Html.DisplayNameFor(model => model.HomeFlag)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                </label>
+            </div>
+            <div class="form-floating mb-3">
+               
+                <input asp-for="Tags" class="form-control" placeholder="" />
+                 <label asp-for="Tags" class="control-label"></label>
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                
+                <input asp-for="Title" class="form-control" placeholder="" />
+                <label asp-for="Title" class="control-label"></label>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+          
+
+            <div class="form-floating mb-3">
+                <input asp-for="UnitslnStock" class="form-control" placeholder="" />
+                <label asp-for="UnitslnStock" class="control-label"></label>
+                <span asp-validation-for="UnitslnStock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Về trang chủ</a>
+</div>
+

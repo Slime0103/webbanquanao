@@ -1,0 +1,114 @@
+﻿<div class="sidebar pe-4 pb-3">
+    <nav class="navbar bg-light navbar-light">
+        <h3 class="text-primary">  Shop Admin</h3>
+        <div class="d-flex align-items-center ms-4 mb-4">
+            <div class="position-relative">
+                <img class="rounded-circle" src="~/adminassets/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+            </div>
+            <div class="ms-3">
+                <h6 class="mb-0">Chien Than Da Den</h6>
+                <span>Admin</span>
+            </div>
+        </div>
+        <div class="navbar-nav w-100">
+            <a class="nav-item nav-link active" asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="fa fa-tachometer-alt me-2"></i>Trang chinh</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Quan Li Don Hang</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" class="dropdown-item">Danh Sach Don Hang</a>
+                    <a asp-area="Admin" asp-controller="AdminOrderDetails" asp-action="Index" class="dropdown-item">Chi Tiet Don Hang</a>
+
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>Quan Li San Pham</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" class="dropdown-item">Danh Sach San Pham</a>
+
+                </div>
+            </div>
+
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-table me-2"></i>Quan Li Khach Hang</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a asp-area="Admin" asp-controller="AdminCustomers" asp-action="Index" class="dropdown-item">Danh Sach Khach Hang</a>
+
+
+                </div>
+            </div>
+
+
+
+            
+
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-keyboard me-2"></i>Quan Li He Thong</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a asp-area="Admin" asp-controller="AdminAccounts" asp-action="Index" class="dropdown-item">Quan Li Tai Khoan</a>
+                    <a asp-area="Admin" asp-controller="AdminCategories" asp-action="Index" class="dropdown-item">Quan Li Danh Muc</a>
+                    <a asp-area="Admin" asp-controller="AdminRoles" asp-action="Index" class="dropdown-item">Quan Li Quyen Truy Cap</a>
+                    <a asp-area="Admin" asp-controller="AdminLocations" asp-action="Index" class="dropdown-item">Quan Li Tinh Thanh</a>
+                    <a asp-area="Admin" asp-controller="AdminShippers" asp-action="Index" class="dropdown-item">Quan Li Shipper</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Quan Li Tin Tuc</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a asp-area="Admin" asp-controller="AdminTblTinTucs" asp-action="Index" class="dropdown-item">Danh sach tin tuc</a>
+
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>Quan Li Ma Giam Gia</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a asp-area="Admin" asp-controller="AdminDiscounts" asp-action="Index" class="dropdown-item">Danh sach ma giam gia</a>
+
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Quan Li Binh Luan</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a asp-area="Admin" asp-controller="AdminComments" asp-action="Index" class="dropdown-item">Danh sach binh luan</a>
+
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Quan Li Tai Khoan</a>
+                <div class="dropdown-menu bg-transparent border-0">
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="Admin" asp-controller="AdminAccounts" asp-action="Index" class="dropdown-item">Danh sach tai khoan</a>
+                        
+                    }
+                   else
+                    {
+                        <a asp-area="Admin" asp-controller="AdminAccounts" asp-action="AdminLogin" class="dropdown-item">Login </a>
+                        <a asp-area="Admin" asp-controller="AdminAccounts" asp-action="AdminDangKyTaiKhoan" class="dropdown-item">Register</a>
+                    }
+
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Quan Li Page</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a asp-area="Admin" asp-controller="AdminPages" asp-action="Index" class="dropdown-item">Danh sach Page</a>
+
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Tư vấn khách hàng</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/adminchat.html" class="nav-link">
+                                            Chat
+                                        </a>
+
+                </div>
+
+            </div>
+           
+        </div>
+    </nav>
+</div>

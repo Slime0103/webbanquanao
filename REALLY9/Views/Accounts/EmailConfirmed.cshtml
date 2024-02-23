@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Email Confirmed";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml"; 
+}
+
+<div class="email-confirmation-container">
+    <h2>Email của bạn đã được xác nhận!</h2>
+    <p>Cảm ơn bạn đã xác nhận địa chỉ email. Bây giờ bạn có thể sử dụng tất cả các chức năng của trang web chúng tôi.</p>
+    <a href="@Url.Action("Index", "Home")" class="btn-confirm">Trở về Trang Chủ</a>
+</div>
+
+<style>
+    .email-confirmation-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 50px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+        .email-confirmation-container h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+    .btn-confirm {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        color: white;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-confirm:hover {
+            background-color: #0056b3;
+        }
+</style>

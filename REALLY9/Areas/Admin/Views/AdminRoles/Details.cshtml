@@ -1,0 +1,44 @@
+﻿@model REALLY9.Models.Role
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="hear-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminRoles" asp-action="Index" >Danh Sach Quyen Truy Cap</a>
+            <span class="breadcrumb-item active">Thong Tin Quyen Truy Cap</span> 
+        </nav>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thong Tin Chi Tiet</h4>
+        <div class="table-respontive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.RoleId</td>
+                    </tr>
+                    <tr>
+                        <td>Ten Quyen Truy Cap:</td>
+                        <td >@Model.RoleName</td>
+                    </tr>
+                    <tr>
+                        <td>Mo Ta:</td>
+                        <td >@Model.Description</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.RoleId">Sua</a> |
+    <a asp-action="Index">Ve Trang Chu</a>
+</div>

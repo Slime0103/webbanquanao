@@ -1,0 +1,402 @@
+﻿@model REALLY9.Models.Product
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+    List<Product> lsProducts = ViewBag.SanPham;
+    Category category = ViewBag.CurrentCat;
+
+}
+<style>
+    .pe-7s-star, .pe-7s-star-o {
+        /* Các style cần thiết cho icon sao, ví dụ: */
+        color: gold;
+        font-size: 16px;
+        /* Thêm các style khác nếu cần */
+    }</style>
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height">
+        <img height="400px" width="1920px" src="~/images/anhnen/anhnenshop.png" />
+    </div>
+    <div class="single-product-area section-space-top-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="single-product-img h-100">
+                        <div class="swiper-container single-product-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="~/images/products/@Model.Thumb" class="single-img gallery-popup">
+                                        <img class="img-full" src="~/images/products/@Model.Thumb" alt="@Model.Title">
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-thumb-with-content row">
+                        <div class="col-12 order-lg-1 order-2 pt-10 pt-lg-0">
+                            <div class="single-product-content">
+                                <h2 class="title">@Model.ProductName</h2>
+                                <div class="price-box pb-1">
+                                    <span class="new-price text-danger">@Model.Price.Value.ToString("#,##0")VND</span>
+
+                                </div>
+                                <div class="rating-box-wrap pb-7">
+                                    <div class="rating-box">
+                                        <ul id="averageRatingStars">
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="review-status ps-4">
+                                        <a href="javascript:void(0)">@Model.Comments.Count() phản hồi từ người dùng</a>
+                                    </div>
+                                </div>
+                                <p class="short-desc mb-6">
+                                    @Model.ShortDesc
+                                </p>
+                                <ul class="quantity-with-btn pb-7">
+                                    <li class="quantity">
+                                        <div class="cart-plus-minus">
+                                            <input id="txtsoLuong" name="txtsoLuong" class="cart-plus-minus-box" value="1" type="text">
+                                        </div>
+                                    </li>
+                                    <li class="add-to-cart">
+                                        <a class="btn btn-custom-size lg-size btn-primary btn-secondary-hover rounded-0" href="javascript:void(0)">Thêm vào giỏ hàng</a>
+                                        <input hidden asp-for="ProductId" />
+                                    </li>
+                                    
+                                </ul>
+                                <div class="product-category text-matterhorn pb-2">
+                                    <span class="title">Categories :</span>
+                                    <ul>
+                                        <li>
+                                            <a href="@Model.Cat.Alias">@Model.Cat.CatName</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="social-link align-items-center pb-lg-8">
+                                    <span class="title pe-3">Share:</span>
+                                    <ul>
+                                       
+                                        <button class="btn btn-custom-size" onclick="copyProductLink()">Copy Link</button>
+                                       
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-tab-area section-space-top-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav product-tab-nav product-tab-style-2" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="active btn btn-custom-size" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">
+                                Mô tả
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="btn btn-custom-size" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">
+                                Phản hồi
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="btn btn-custom-size" id="shipping-tab" data-bs-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">
+                                Giao hàng
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content product-tab-content">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                            <div class="product-description-body">
+                                @Html.Raw(Model.Description)
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                            <!-- ... Content của phần Reviews -->
+                            <div class="feedback-area pt-5">
+                                <h4 class="heading mb-5">@Model.Comments.Count() lượt phản hồi</h4>
+                                <ul class="user-info-wrap">
+                                    @foreach (var comment in Model.Comments) // Giả sử bạn đã tải danh sách bình luận vào Model
+                                    {
+                                        <li>
+                                            <ul class="user-info">
+
+                                                <li class="user-comment">
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            @for (int i = 0; i < comment.Rating.GetValueOrDefault(); i++)
+                                                            {
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                            }
+                                                            @for (int i = comment.Rating.GetValueOrDefault(); i < 5; i++)
+                                                            {
+                                                                <li><i class="pe-7s-star-o"></i></li> <!-- Đây là icon ngôi sao không tô màu, thay đổi class tùy theo thư viện icon của bạn -->
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <span><strong>@comment.CustomerName -</strong> @comment.CreatedAt</span>
+                                                    </div>
+                                                    <p class="short-desc mb-0">
+                                                        @comment.CommentText
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+
+
+                                <div class="rating-box">
+                                    <span></span>
+                                    <span></span>
+                                    <span>Your rating</span>
+                                    <ul id="ratingStars" class="rating">
+                                        <li><i class="pe-7s-star" onclick="setRating(1)"></i></li>
+                                        <li><i class="pe-7s-star" onclick="setRating(2)"></i></li>
+                                        <li><i class="pe-7s-star" onclick="setRating(3)"></i></li>
+                                        <li><i class="pe-7s-star" onclick="setRating(4)"></i></li>
+                                        <li><i class="pe-7s-star" onclick="setRating(5)"></i></li>
+                                    </ul>
+                                </div>
+                                <form id="commentForm" class="feedback-form pt-8" action="/Product/AddComment" method="post">
+                                    <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                                    <input type="hidden" id="hiddenRatingField" name="rating" value="0">
+                                    <div class="group-input">
+                                        <div class="form-field me-md-6 mb-6 mb-md-0">
+                                            <input type="text" name="name" placeholder="Your Name*" class="input-field">
+                                        </div>
+                                        <div class="form-field me-md-6 mb-6 mb-md-0">
+                                            <input type="text" name="email" placeholder="Your Email*" class="input-field">
+                                        </div>
+                                        <div class="form-field">
+                                            <input type="text" name="number" placeholder="Phone number" class="input-field">
+                                        </div>
+                                    </div>
+                                    <div class="form-field mt-6">
+                                        <textarea name="message" placeholder="Message" class="textarea-field"></textarea>
+                                    </div>
+                                    <div class="button-wrap mt-8">
+                                        <button type="button" value="submit" class="btn btn-custom-size lg-size btn-secondary btn-primary-hover btn-lg rounded-0" name="submit" onclick="submitComment()">Submit</button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                            <div class="product-shipping-body">
+                                <h4 class="title">THời gian giao hàng</h4>
+                                <p class="short-desc mb-4">
+                                    Sản phẩm được ship từ kí túc xá khu B ĐHQG HCM nên có thể tốn 1-2 ngày với những khách hàng ở gần khu vực và 4 -5 ngày đối với khách hàng ở xa.
+                                    Tất cả sản phẩm của chúng tôi đều có giá phù hợp và chất lượng tốt nhất.
+                                    Nếu có bất kỳ câu hỏi nào, xin vui lòng liên hệ với chúng tôi và chúng tôi cam kết sẽ nỗ lực hết mình để giúp bạn giải quyết vấn đề.
+                                </p>
+                                <h4 class="title">Hủy đơn hàng</h4>
+                                <p class="short-desc mb-4">
+
+                                    Nếu bạn không cần sản phẩm này và không cảm thấy lo lắng, bạn có thể liên hệ với chúng tôi
+                                    chúng tôi sẽ giúp bạn giải quyết vấn đề.
+
+                                </p>
+                                <h4 class="title">Nếu sản phẩm lỗi</h4>
+                                <p class="short-desc mb-0">
+
+                                    Nếu đó là vấn đề về chất lượng, chúng tôi sẽ gửi lại sản phẩm khác hoặc hoàn tiền cho bạn.
+                                    Nếu bạn nhận được sản phẩm bị hỏng hoặc sai, vui lòng liên hệ với chúng tôi và đính kèm một số hình ảnh về sản phẩm,
+                                    chúng tôi sẽ gửi một sản phẩm mới và chính xác sau khi đã xác nhận.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-slider-area section-space-top-95 section-space-bottom-100">
+        <div class="container">
+            <div class="section-title text-center pb-55">
+                <span class="sub-title text-primary">Bạn có thể thích</span>
+                <h2 class="title mb-0">Sản phẩm tương tự</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="swiper-slider-holder swiper-arrow">
+                        <div class="swiper-container product-slider border-issue">
+                            <div class="swiper-wrapper">
+                                @if (lsProducts != null)
+                                {
+                                    foreach (var item in lsProducts)
+                                    {
+                                        string url = "";
+                                        <div class="swiper-slide">
+                                            <div class="product-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a href="@url">
+                                                        <img height="270px" width="270px" class="img-full" src="~/images/products/@item.Thumb" alt="@item.Title">
+                                                    </a>
+                                                    
+                                                </div>
+                                                <div class="product-content texx">
+                                                    <a class="product-name" href="@url">@item.ProductName</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">@item.Price</span>
+                                                    </div>
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="YOUR_NONCE_VALUE"></script>
+</main>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $(".add-to-cart").click(function () {
+                    var productid = $('#ProductId').val();
+                    var soLuong = $('#txtsoLuong').val();
+                    $.ajax({
+                        url: '/api/cart/add',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            productID: productid,
+                            amount: soLuong
+                        },
+                        success: function (response) {
+                            loadHeaderCart();
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert("There was an error posting the data to the server:" + error.responseText);
+                        }
+                    });
+                });
+            });
+            function loadHeaderCart() {
+                $("#miniCart").load("/AjaxContent/HeaderCart");
+                $("#numberCart").load("/AjaxContent/NumberCart");
+            }
+
+            
+        });
+    </script>
+    <script>
+       
+        function setRating(rating) {
+            
+            $("#ratingStars li").removeClass("active");
+
+            
+            for (var i = 0; i < rating; i++) {
+                $("#ratingStars li:eq(" + i + ")").addClass("active");
+            }
+        }
+
+       
+        function submitComment() {
+            var productId = $("#commentForm input[name='ProductId']").val();
+            var customerName = $("#commentForm input[name='name']").val();
+            var email = $("#commentForm input[name='email']").val();
+            var commentText = $("#commentForm textarea[name='message']").val();
+            var rating = $("#ratingStars li.active").length; 
+            
+            $.ajax({
+                url: "/Product/AddComment",
+                type: "POST",
+                data: {
+                    ProductId: productId,
+                    CustomerName: customerName,
+                    Email: email,
+                    CommentText: commentText,
+                    Rating: rating
+                },
+                success: function () {
+                    loadComments(productId);
+                    location.reload();
+                }
+            });
+        }
+
+       
+        function loadComments(productId) {
+            $.ajax({
+                url: "/Product/LoadComments?Alias" + productId,
+                type: "GET",
+                success: function (data) {
+                    
+                    location.reload();
+                    $("#comments").html(data);
+                }
+            });
+        }
+        function getProductDetailUrl(alias, productId) {
+            return window.location.origin + '/Product/Details/' + alias + '/' + productId;
+        }
+        function shareOnFacebookMessenger(alias, productId) {
+            var productUrl = getProductDetailUrl(alias, productId);
+            var messengerShareUrl = "https://www.facebook.com/dialog/send?app_id    &link=" + encodeURIComponent(productUrl) + "&redirect_uri=" + encodeURIComponent(window.location.href);
+
+            window.open(messengerShareUrl, '_blank');
+        }
+        function copyProductLink() {
+            var url = window.location.href; // Lấy URL hiện tại của trang
+            navigator.clipboard.writeText(url).then(function () {
+                alert('Link copied to clipboard');
+            })
+                .catch(function (error) {
+                    alert('Error copying link: ', error);
+                });
+        }
+        function shareOnFacebook() {
+            var url = window.location.href;
+            var facebookShareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+
+            window.open(facebookShareUrl, '_blank');
+        }
+        
+    </script>
+}

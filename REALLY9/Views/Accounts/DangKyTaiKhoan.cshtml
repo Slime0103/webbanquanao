@@ -1,0 +1,75 @@
+﻿@model REALLY9.ModelViews.RegisterVM
+
+@{
+    ViewData["Title"] = "DangKyTaiKhoan";
+    Layout = "~/Views/Shared/_SignInSignUpLayout.cshtml";
+}
+    
+
+<hr />
+<div class="container-xxl position-relative bg-white d-flex p-0">
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a href="/" class="">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>REALLY9</h3>
+                    </a>
+                    <h3>Đăng kí</h3>
+                </div>
+                 <form asp-action="DangKyTaiKhoan">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-floating mb-3">
+                        
+                        <input asp-for="FullName" class="form-control" placeholder="FullName" />
+                        <label asp-for="FullName" class="control-label"></label>
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                        <div class="form-floating mb-3">
+
+                            <input asp-for="Address" class="form-control" placeholder="Address" />
+                            <label asp-for="Address" class="control-label"></label>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+
+                            <input asp-for="Birthday" class="form-control" placeholder="Birthday" />
+                            <label asp-for="Birthday" class="control-label"></label>
+                            <span asp-validation-for="Birthday" class="text-danger"></span>
+                        </div>
+                <div class="form-floating mb-3">
+                        
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                        <label asp-for="Email" class="control-label"></label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-4">
+                        
+                        <input asp-for="Phone" class="form-control" placeholder="Phone"/>
+                        <label asp-for="Phone" class="control-label"></label>
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                 <div class="form-floating mb-4">
+                        
+                        <input asp-for="Password" class="form-control" placeholder="Password" />
+                        <label asp-for="Password" class="control-label"></label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                    <div class="form-floating mb-4">
+                        
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="ConfirmPassword" />
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                
+                <button type="submit" value="Create" class="btn btn-primary py-3 w-100 mb-4">Đăng kí</button>
+                        <p class="text-center mb-0">Bạn đã có tài khoản? <a href="/dang-nhap.html">Đăng nhập</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

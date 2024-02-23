@@ -1,0 +1,143 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<REALLY9.Models.Product>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Index" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-12">
+                <div class="d-md-flex align-items-center">
+                    <div class="m-b-10 m-r-15">
+                        <div class="input-affix m-v-10">
+                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Search Product" />
+                        </div>
+                    </div>
+                    <div class="m-b-10 m-r-15">
+                        <div class="input-affix m-v-10">
+                            <select class="custom-select" id="txtCatID" name="txtCatID" style="min-width:200px;" asp-items="ViewBag.DanhMuc">
+                                <option value="" disabled selected>Chọn Danh Mục</option>
+                                <option value="all">All</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-respontive">
+    <div class="bg-light rounded h-100 p-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Cat ID</th>
+                    <th scope="col">Cat name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">UnitInStock</th>
+
+                </tr>
+            </thead>
+            <tbody id="records_table">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.ProductId</th>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <h6>@item.ProductName</h6>
+                                </div>
+                            </td>
+                            <td>@item.CatId</td>
+                            <td>@item.Price</td>
+                            <td>
+                                @if (item.UnitslnStock > 0)
+                                {
+                                    <div>In Stock</div>
+                                }
+                                else
+                                {
+                                    <div>Out Stock</div>
+                                }
+                            </td>
+
+
+                            <td>
+                                <a class="btn btn-outline-primary m-2" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@item.ProductId">Chi Tiet</a>
+                                <a class="btn btn-outline-success m-2" asp-area="Admin" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@item.ProductId">Sua</a>
+                                <a class="btn btn-outline-danger m-2" asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@item.ProductId">Xoa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div aria-label="Page navigation example">
+            <ul class="pagination">
+                <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+            </ul>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#txtCatID").change(function () {
+                var catID = jQuery(this).children(":selected").attr("value");
+                catID = parseFloat(catID);
+                $("#txtCatID >[value=" + catID + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminProducts/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        CatID: catID
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                var url = strkeyword.length === 0 ? '/Admin/Search/FindAllProducts/' : '/Admin/Search/FindProduct/';
+
+                $.ajax({
+                    url: url,
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#loader").hide();
+                        $("#records_table").html(results); 
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+}

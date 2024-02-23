@@ -1,0 +1,34 @@
+﻿@model REALLY9.ModelViews.XemDonHang
+
+<div class="order-details">
+    <h2>Chi Tiết Đơn Hàng</h2>
+    <p>Mã Đơn Hàng: @Model.DonHang.OrderId</p>
+    <p>Ngày Đặt: @Model.DonHang.Orderdate</p>
+    @if(@Model.DonHang.TotalMoneyAfterusedis !=null){
+    <p>Tổng Tiền: @Model.DonHang.TotalMoneyAfterusedis.Value.ToString("#,##0")VND</p>
+    }else{
+        <p>Tổng Tiền: @Model.DonHang.TotalMoney.Value.ToString("#,##0")VND</p>
+    }
+   
+
+    <h3>Sản phẩm trong đơn hàng:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Tổng số lượng</th>
+                <th>Giá</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ChiTietDonHang)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price.Value.ToString("#,##0")VND</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
